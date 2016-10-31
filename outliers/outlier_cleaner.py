@@ -1,20 +1,19 @@
-#!/usr/bin/python
-
-
 def outlierCleaner(predictions, ages, net_worths):
-    """
-        Clean away the 10% of points that have the largest
-        residual errors (difference between the prediction
-        and the actual net worth).
 
-        Return a list of tuples named cleaned_data where 
-        each tuple is of the form (age, net_worth, error).
-    """
+    import numpy as np
     
-    cleaned_data = []
 
-    ### your code goes here
-
+    removal = (net_worths - predictions)**2
     
+    zip_data=zip(ages, net_worths, removal)
+    dtype = [('ages', int),  ('net_worths', float),('error', float)]
+    np_data = np.array(zip_data,dtype=dtype)
+    np_data.sort(order='error')
+    print np_data
+    for i in range(0,int(round(0.1*np_data.size))):
+        x = int(np_data.size)-1
+        np_data = np.delete(np_data, (x),axis=0)
+    cleaned_data = tuple(map(tuple,np_data))
+    print np_data
     return cleaned_data
-
+    

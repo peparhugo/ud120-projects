@@ -38,6 +38,9 @@ labels_train   = labels_train[:150]
 
 
 ### your code goes here
-
+from sklearn.tree import DecisionTreeClassifier as dtc
+clf = dtf()
+clf.fit(features_train, labels_train)
+clf.score(feautres_test, labels_test)
 
 
